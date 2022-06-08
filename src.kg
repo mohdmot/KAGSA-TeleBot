@@ -1,0 +1,30 @@
+var token = "BOT-TOKEN" 
+var bot = HTTP()
+var update_id = ""
+while true {
+	bot.URL("https://api.telegram.org/bot%{token}/getUpdates") 
+	bot.method("get")
+	var response = JSON.toDict(bot.send().text)
+	if get(response, "ok") == true {
+		var result = get(response, "result")
+		if length(result) > 0 {
+			var data = get(get(result, length(result)-1 ), "message") 
+			var chat = get(data, "chat" ) 
+			if update_id != toStr(get(get(result, length(result)-1 ), "update_id" ))  {
+				var update_id = toStr(get(get(result, length(result)-1 ), "update_id" )) 
+				var chat_id = toStr(get(chat, "id")) 
+				var message = get(data, "text")
+				var name = get(chat , "first_name")
+				
+				// manage messages here
+				if message == "/start" {
+					var msg = "Welcome %{name} 🔆, This Bot Made in KAGSA"
+					var send = HTTP()
+					send.method("post")
+					send.URL("https://api.telegram.org/bot%{token}/sendMessage?chat_id="+chat_id+"&text=" +msg)
+					send.send()
+			}
+		}
+	}
+	} 
+}

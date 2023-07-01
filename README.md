@@ -9,4 +9,4 @@ This is a sample Telegram bot created using the [KAGSA programming language](htt
 To use this bot, follow these steps:
 
     In the code, find Line 1 and replace the variable with your Telegram bot token.
-    Then, on Line 2, you can start managing the bot with input from users.
+    Then, on Line 20, you can start managing the bot with input from users.
